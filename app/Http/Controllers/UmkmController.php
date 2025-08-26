@@ -41,8 +41,11 @@ class UmkmController extends Controller
             'nama_pemilik' => 'required|max:255',
             'jenis_umkm' => 'required|max:255',
             // 'harga' => 'numeric',
-            'alamat' => 'required',
+            'alamat' => 'required|max:255',
             // 'no_whatsapp' => 'numeric',
+            'instagram' => 'max:255',
+            'shopee' => 'max:255',
+            'tiktok' => 'max:255',
         ], $this->feedback_validate);
 
         // simpan file pach gambar
@@ -97,8 +100,11 @@ class UmkmController extends Controller
             'nama_pemilik' => 'required|max:255',
             'jenis_umkm' => 'required|max:255',
             // 'harga' => 'numeric',
-            'alamat' => 'required',
+            'alamat' => 'required|max:255',
             // 'no_whatsapp' => 'numeric',
+            'instagram' => 'max:255',
+            'shopee' => 'max:255',
+            'tiktok' => 'max:255',
         ], $this->feedback_validate);
 
         if ($request->gambar) {

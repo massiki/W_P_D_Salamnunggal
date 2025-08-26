@@ -144,7 +144,7 @@ class NewsController extends Controller
             'slug' => $slug,
             'deskripsi' => $request->deskripsi,
             'user_id' => Auth::id(),
-            'views' => 0
+            'views' => $news->views
         ]);
 
         return redirect()->route('admin.berita')->with('success', 'Berita berhasil diupdate');
