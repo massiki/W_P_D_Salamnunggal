@@ -1,61 +1,188 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Profile Desa Salamnunggal
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Website **profil desa** dan **panel admin** untuk mengelola informasi desa (berita, galeri, potensi, UMKM, struktur pemerintahan, dan lain-lain). Project ini dibangun menggunakan **Laravel 12** dengan asset bundler **Vite** dan styling **Tailwind CSS**.
 
-## About Laravel
+### Ringkasan
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Jenis aplikasi**: Website publik + Dashboard Admin
+- **Backend**: Laravel 12 (PHP 8.2)
+- **Frontend**: Blade + Vite + Tailwind CSS
+- **Database default**: SQLite (bisa diganti MySQL)
+- **Upload media**: disimpan ke folder `public/assets/upload/...`
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Fitur
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Halaman Publik**
+  - **Beranda**: sambutan, highlight struktur (top 5), berita terbaru, UMKM terbaru, potensi terbaru, statistik penduduk, quick cards
+  - **Tentang Desa**
+    - Histori (daftar kepala desa/periode)
+    - Profil desa
+    - Struktur pemerintahan (daftar perangkat/struktur + gambar struktur)
+  - **Berita**
+    - Listing berita + pencarian
+    - Detail berita by slug + auto increment views
+  - **Galeri**: listing galeri + pagination
+  - **Informasi**
+    - Potensi desa
+    - Produk UMKM
+  - **Kontak Kami**
+    - Informasi kontak (alamat/email/telepon, dll)
+    - Form saran/masukan (tersimpan ke database)
 
-## Learning Laravel
+- **Panel Admin (butuh login)**
+  - **Dashboard**: ringkasan jumlah data (struktur, potensi, UMKM, berita) dan statistik penduduk
+  - **Manajemen konten** (CRUD sesuai modul)
+    - Sambutan
+    - Visi & Misi
+    - Gambar struktur
+    - Struktur pemerintahan
+    - Histori kepala desa
+    - UMKM
+    - Potensi desa
+    - Galeri
+    - Berita (dengan slug otomatis & upload gambar)
+    - Assets gambar (logo / banner / struktur / galeri)
+    - Sosial media footer
+    - Info kontak footer
+    - Data penduduk (jumlah penduduk/RT/RW/dusun)
+    - Kontak masuk (daftar saran dari warga)
+    - Kartu/shortcut di beranda
+    - User (update user tertentu)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Teknologi yang digunakan
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **PHP**: ^8.2
+- **Framework**: Laravel ^12
+- **Build tools**: Vite ^6 + `laravel-vite-plugin`
+- **Styling**: Tailwind CSS ^4 (`@tailwindcss/vite`)
+- **HTTP Client**: Axios
+- **Dev tooling**: `concurrently` (opsional untuk menjalankan server+queue+vite bareng)
+- **Database**: SQLite (default), bisa MySQL (opsional)
+- **Queue & Session**: menggunakan **database driver** (default dari `.env.example`)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Struktur modul (database)
 
-## Laravel Sponsors
+Beberapa tabel inti yang digunakan:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **`news`**: berita (gambar, judul, slug, deskripsi, views, user_id)
+- **`images`**: assets gambar (kategori: `logo|struktur|banner|galeri`)
+- **`umkm`**: informasi UMKM (pemilik, jenis, harga, alamat, sosial, WA)
+- **`potensi`**: potensi desa (gambar, judul, deskripsi)
+- **`structures`**: struktur perangkat (nama, jabatan, sosial)
+- **`histories`**: histori kepemimpinan (nama, periode)
+- **`sambutan`**: sambutan kepala desa
+- **`visi_misi`**: visi dan misi
+- **`penduduk`**: statistik penduduk/RT/RW/dusun
+- **`contacts`**: pesan/saran dari halaman kontak
+- **`sosmed`** & **`info_kontak`**: konten footer
+- **`cards`**: kartu/shortcut di beranda
 
-### Premium Partners
+### Prasyarat
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- **PHP 8.2+**
+- **Composer**
+- **Node.js + npm**
+- (Opsional) **Laragon** (Windows) atau stack PHP lain
 
-## Contributing
+### Instalasi & Menjalankan Project (Development)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### 1) Install dependency
 
-## Code of Conduct
+```bash
+composer install
+npm install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+#### 2) Setup environment
 
-## Security Vulnerabilities
+Copy file env:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+copy .env.example .env
+```
 
-## License
+Generate app key:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan key:generate
+```
+
+#### 3) Database (default: SQLite)
+
+Di `.env` defaultnya:
+
+- `DB_CONNECTION=sqlite`
+- `SESSION_DRIVER=database`
+- `QUEUE_CONNECTION=database`
+- `CACHE_STORE=database`
+
+Buat file SQLite jika belum ada:
+
+```bash
+type nul > database\database.sqlite
+```
+
+Lalu migrate + seed:
+
+```bash
+php artisan migrate --seed
+```
+
+#### 4) Jalankan aplikasi
+
+Opsi A (pisah):
+
+```bash
+php artisan serve
+npm run dev
+```
+
+Opsi B (sekali jalan, server+queue+vite):
+
+```bash
+composer run dev
+```
+
+### Akun Admin (default dari seeder)
+
+Seeder menyediakan akun admin default:
+
+- **Email**: `admin@gmail.com`
+- **Password**: `password`
+- **Login URL**: `/login`
+
+> Jika kamu tidak menjalankan `--seed`, akun default ini tidak akan dibuat.
+
+### Routing utama
+
+- **Publik**
+  - `/` (beranda)
+  - `/tentang/histori`, `/tentang/profile`, `/tentang/struktur-pemerintahan`
+  - `/kontak-kami` (GET/POST)
+  - `/galeri`
+  - `/informasi/potensi`, `/informasi/produk-umkm`
+  - `/berita` dan `/berita/{slug}`
+- **Admin**
+  - `/admin/dashboard`
+  - Modul CRUD berada di prefix `/admin/...`
+
+### Catatan Upload File
+
+Beberapa modul menyimpan file upload langsung ke:
+
+- `public/assets/upload/berita`
+- `public/assets/upload/gambar`
+
+Pastikan folder tersebut writable oleh web server.
+
+### Build untuk Production
+
+```bash
+npm run build
+```
+
+Lalu pastikan environment production sesuai kebutuhan (APP_ENV, APP_DEBUG, APP_URL, dan konfigurasi DB).
+
+### Lisensi
+
+Project ini mengikuti lisensi bawaan Laravel (MIT), kecuali jika kamu menggantinya sesuai kebutuhan organisasi.
